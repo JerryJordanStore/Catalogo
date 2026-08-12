@@ -160,7 +160,7 @@ function renderGrid(containerId, list) {
     <div class="product-card ${soldOut ? "is-soldout" : ""}" data-id="${p.id}">
       <div class="product-media">
         ${soldOut ? `<span class="badge soldout">Agotado</span>` : (p.badge ? `<span class="badge ${p.badge}">${badgeLabel(p.badge)}</span>` : "")}
-        <img class="product-photo" src="${defaultImg}" alt="${p.name}" loading="lazy">
+        <img class="product-photo" src="${defaultImg}" alt="${p.name}" width="400" height="400">
       </div>
       <div class="product-info">
         <div class="brand">${p.cat}</div>
