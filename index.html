@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jerry Jordan | Wear Your Legacy — Ropa Urbana Perú</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ANNOUNCEMENT MARQUEE -->
+  <div class="marquee-bar">
+    <div class="marquee-track" id="tickerTrack"></div>
+  </div>
+  <!-- HEADER -->
+  <header>
+    <div class="wrap nav">
+      <div class="logo"><img src="assets/logo.png" alt="Jerry Jordan" class="logo-img"></div>
+      <nav class="nav-links" id="nav-links">
+        <a href="#categorias">Categorías</a>
+        <a href="#destacados">Catálogo</a>
+        <a href="#tiendas">Contacto</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn cart-count" id="cart-btn" title="Carrito" aria-haspopup="dialog" aria-controls="cart-drawer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <span class="cart-badge" id="cart-badge">0</span>
+        </button>
+        <button class="icon-btn burger" id="burger-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-links">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="court-arc"></div>
+    <div class="court-arc two"></div>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Ropa urbana · Lima, Perú</span>
+        <div class="hero-socials">
+          <a href="https://instagram.com/jordan.store03" target="_blank" rel="noopener" title="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+          <a href="https://tiktok.com/@jordan.store03" target="_blank" rel="noopener" title="TikTok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></a>
+          <a href="https://www.facebook.com/share/18BS5456LX/" target="_blank" rel="noopener" title="Facebook"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        </div>
+        <h1>WEAR YOUR<br><em>LEGACY</em>.</h1>
+        <p class="lead">Moda urbana con diseños modernos, materiales de calidad y accesorios que completan tu estilo.</p>
+        <div class="hero-ctas">
+          <a href="#destacados" class="btn btn-primary">Ver catálogo
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="https://wa.me/51973758234" target="_blank" rel="noopener" class="btn btn-outline">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.8-.9-.2-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.1.2-.3.2-.6.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5s-.6-1.5-.9-2c-.2-.5-.5-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.6-.7 1.9-1.3.2-.6.2-1.1.2-1.2 0-.2-.2-.2-.5-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div><strong>100%</strong><span>Algodón peruano</span></div>
+          <div><strong>+45</strong><span>Modelos en catálogo</span></div>
+          <div><strong>24h</strong><span>Envío en Lima</span></div>
+        </div>
+      </div>
+ 
+      <div class="hero-visual">
+        <div class="sneaker-card">
+          <div class="floating-chip chip-1"><span class="chip-dot"></span>Stock limitado</div>
+          <div class="floating-chip chip-2">🔥</div>
+          <div class="tag-row">
+            <span class="tag">Nuevo drop</span>
+            <span class="scoreboard">Polo Holográfico JJ</span>
+          </div>
+          <div class="sneaker-illustration">
+            <img src="assets/products/polos/holo_negro_plateado.jpg" alt="Polo Holográfico JJ" style="width:100%; height:100%; object-fit:cover; border-radius:16px;">
+          </div>
+          <h3>Polo Holográfico JJ</h3>
+          <div class="price-row">
+            <span class="price">S/ 39.90</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- CATEGORIES -->
+  <section class="section" id="categorias">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Elige tu prenda</span>
+          <h2>Compra por categoría</h2>
+        </div>
+        <a href="#destacados" class="see-all">Ver todo
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+      <div class="cat-grid reveal">
+        <div class="cat-card cat-1" data-cat="Polos">
+          <div class="arc-deco"></div>
+          <span class="cnum">01 — Algodón peruano</span>
+          <h3>Polos</h3>
+        </div>
+        <div class="cat-card cat-2" data-cat="Poleras">
+          <div class="arc-deco"></div>
+          <span class="cnum">02 — Franela reactiva</span>
+          <h3>Poleras</h3>
+        </div>
+        <div class="cat-card cat-3" data-cat="Casacas">
+          <div class="arc-deco"></div>
+          <span class="cnum">03 — Estilo vintage</span>
+          <h3>Casacas</h3>
+        </div>
+        <div class="cat-card cat-4" data-cat="Chalecos">
+          <div class="arc-deco"></div>
+          <span class="cnum">04 — Importados</span>
+          <h3>Chalecos</h3>
+        </div>
+        <div class="cat-card cat-5" data-cat="Accesorios">
+          <div class="arc-deco"></div>
+          <span class="cnum">05 — Complementa tu look</span>
+          <h3>Accesorios</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- TRUST STRIP -->
+  <div class="trust-strip reveal">
+    <div class="trust-item">
+      <div class="ic">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D8202F" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>
+      </div>
+      <div><h5>Calidad premium</h5><p>Algodon 100% peruano, peinado, reactivo y antipilling. Y productos importados.</p></div>
+    </div>
+    <div class="trust-item">
+      <div class="ic">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D8202F" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      </div>
+      <div><h5>Envíos en Lima y provincia</h5><p>Coordinamos entrega en Lima y provincias por WhatsApp 100% confiables.</p></div>
+    </div>
+    <div class="trust-item">
+      <div class="ic">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D8202F" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+      </div>
+      <div><h5>Atención por WhatsApp</h5><p>Consulta tallas y stock antes de confirmar tu pedido.</p></div>
+    </div>
+    <div class="trust-item">
+      <div class="ic">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D8202F" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 12l4-2M3 12l4 2"/></svg>
+      </div>
+      <div><h5>Diseños limitados</h5><p>Contamos con prendas de edicion limitada.</p></div>
+    </div>
+  </div>
+ 
+  <!-- NEW ARRIVALS -->
+  <!--
+  <section class="section" id="novedades">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Recién llegados</span>
+          <h2>Novedades de la semana</h2>
+        </div>
+        <a href="#destacados" class="see-all">Ver catálogo
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+      <div class="product-grid reveal" id="product-grid"></div>
+    </div>
+  </section>
+  -->
+
+  <!-- BESTSELLERS -->
+  <section class="section alt" id="destacados">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Catálogo completo</span>
+          <h2>Todos los productos</h2>
+        </div>
+      </div>
+      <div class="filters-bar reveal" id="filters-bar">
+        <div class="filter-group" id="filter-cat">
+          <button class="filter-tab active" data-cat="Todos">Todos</button>
+          <button class="filter-tab" data-cat="Polos">Polos</button>
+          <button class="filter-tab" data-cat="Poleras">Poleras</button>
+          <button class="filter-tab" data-cat="Casacas">Casacas</button>
+          <button class="filter-tab" data-cat="Chalecos">Chalecos</button>
+          <button class="filter-tab" data-cat="Accesorios">Accesorios</button>
+        </div>
+        <div class="filters-row">
+          <div class="filter-group" id="filter-size">
+            <span class="filter-label">Talla</span>
+            <button class="chip" data-size="S">S</button>
+            <button class="chip" data-size="M">M</button>
+            <button class="chip" data-size="L">L</button>
+          </div>
+          <div class="filter-group">
+            <span class="filter-label">Precio</span>
+            <select id="filter-price">
+              <option value="todos">Todos</option>
+              <option value="0-30">Hasta S/ 30</option>
+              <option value="30-60">S/ 30 – S/ 60</option>
+              <option value="60-100">S/ 60 – S/ 100</option>
+              <option value="100-99999">Más de S/ 100</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <span class="filter-label">Ordenar</span>
+            <select id="filter-sort">
+              <option value="relevancia">Relevancia</option>
+              <option value="price-asc">Precio: menor a mayor</option>
+              <option value="price-desc">Precio: mayor a menor</option>
+            </select>
+          </div>
+          <button class="filter-clear" id="filter-clear" type="button">Limpiar filtros</button>
+        </div>
+        <div class="filter-count" id="filter-count"></div>
+      </div>
+      <div class="product-grid reveal" id="product-grid-2"></div>
+      <div class="empty-state" id="empty-state" style="display:none;">
+        <p>No hay productos que coincidan con estos filtros.</p>
+        <button class="btn btn-outline" id="empty-clear" type="button">Limpiar filtros</button>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- CONTACTO -->
+  <section class="section" id="tiendas">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Wear your legacy</span>
+          <h2>Síguenos y escríbenos</h2>
+        </div>
+      </div>
+      <div class="store-grid reveal">
+        <div class="store-card">
+          <div class="court-mini"></div>
+          <h3>WhatsApp</h3>
+          <div class="row"><strong>Consultas</strong>973-758-234</div>
+          <div class="row"><strong>Horario</strong>Respondemos todos los días</div>
+        </div>
+        <div class="store-card">
+          <div class="court-mini"></div>
+          <h3>Instagram / TikTok</h3>
+          <div class="row"><strong>Usuario</strong>@jordan.store03</div>
+          <div class="row"><strong>Contenido</strong>Drops de edición limitada</div>
+        </div>
+        <div class="store-card">
+          <div class="court-mini"></div>
+          <h3>Facebook</h3>
+          <div class="row"><strong>Página</strong>JJB Jordan Store</div>
+          <div class="row"><strong>Contenido</strong>Catálogo completo y novedades</div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo-row">
+            <div class="footer-logo">Jerry Jordan</div>
+            <button class="about-btn" id="about-btn" title="Sobre nosotros" aria-haspopup="dialog" aria-controls="about-modal">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="11"/><circle cx="12" cy="7.5" r="0.6" fill="currentColor" stroke="none"/></svg>
+            </button>
+          </div>
+          <p>Wear Your Legacy. Ropa urbana: polos poleras casacas y accesorios de alta calidad nacionales e importados.</p>
+          <div class="socials" style="margin-top:20px;">
+            <a href="https://instagram.com/jordan.store03" target="_blank" rel="noopener" title="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+            <a href="https://tiktok.com/@jordan.store03" target="_blank" rel="noopener" title="TikTok"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></a>
+            <a href="https://wa.me/51973758234" target="_blank" rel="noopener" title="WhatsApp"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20l1.1-5.4A8.5 8.5 0 1 1 21 11.5z"/></svg></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Tienda</h5>
+          <a href="#categorias">Polos</a>
+          <a href="#categorias">Poleras</a>
+          <a href="#categorias">Casacas</a>
+          <a href="#categorias">Accesorios</a>
+        </div>
+        <div class="footer-col">
+          <h5>¿Por qué Jerry Jordan?</h5>
+          <p> • Calidad premium</p>
+          <p> • Diseños exclusivos</p>
+          <p> • Envíos a todos el Perú</p>
+          <p> • Pagos seguros</p>
+        </div>
+        <div class="footer-col">
+          <h5>Contacto</h5>
+          <a href="https://wa.me/51973758234" target="_blank" rel="noopener">WhatsApp 973-758-234</a>
+          <a href="https://instagram.com/jordan.store03" target="_blank" rel="noopener">@jordan.store03</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Jerry Jordan Perú. Todos los derechos reservados.</span>
+        <span>Términos y condiciones · Política de privacidad</span>
+      </div>
+    </div>
+  </footer>
+ 
+<!-- ABOUT MODAL -->
+<div class="about-modal-overlay" id="about-modal-overlay"></div>
+<div class="about-modal" id="about-modal" role="dialog" aria-modal="true" aria-label="Sobre nosotros" aria-hidden="true">
+  <button class="about-modal-close" id="about-modal-close" aria-label="Cerrar">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <div class="about-modal-body">
+    <span class="eyebrow">Sobre nosotros</span>
+    <h2>Nuestra historia</h2>
+    <p><strong>JERRY JORDAN</strong> nace de una visión: crear una marca de moda premium con identidad propia, capaz de trascender fronteras y conectar con personas que valoran la calidad, el diseño y los detalles.</p>
+    <p>Cada prenda propia de la marca representa nuestra filosofía: menos exceso, más carácter. Diseñamos piezas contemporáneas, elegantes y atemporales, combinando materiales cuidadosamente seleccionados con acabados que reflejan nuestra búsqueda constante por la excelencia.</p>
+    <p>Nuestra meta no es simplemente crear ropa. Es construir una identidad que pueda reconocerse en cualquier parte del mundo.</p>
+    <p>Desde Perú hacia el mundo, <strong>JERRY JORDAN</strong> representa una nueva generación de moda premium: auténtica, sofisticada y hecha para permanecer.</p>
+    <p class="about-tagline">Premium by identity. International by vision.</p>
+  </div>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="product-modal-overlay" id="product-modal-overlay"></div>
+<div class="product-modal" id="product-modal" role="dialog" aria-modal="true" aria-label="Detalle del producto" aria-hidden="true">
+  <button class="product-modal-close" id="product-modal-close" aria-label="Cerrar">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <div class="product-modal-body" id="product-modal-body">
+    <!-- se llena por JS -->
+  </div>
+</div>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cart-overlay"></div>
+<aside class="cart-drawer" id="cart-drawer" role="dialog" aria-label="Carrito de compras" aria-hidden="true">
+  <div class="cart-drawer-head">
+    <h3>Tu carrito</h3>
+    <button class="cart-close" id="cart-close" aria-label="Cerrar carrito">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+ 
+  <div class="cart-items" id="cart-items">
+    <!-- se llena por JS -->
+  </div>
+ 
+  <div class="cart-empty" id="cart-empty">
+    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+    <p>Tu carrito está vacío.<br>Agrega tus pares favoritos.</p>
+  </div>
+ 
+  <div class="cart-drawer-footer" id="cart-footer">
+    <div class="cart-total-row">
+      <span>Total estimado</span>
+      <strong id="cart-total">S/ 0.00</strong>
+    </div>
+    <a href="#" target="_blank" rel="noopener" class="btn btn-red cart-whatsapp-btn" id="whatsapp-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.6-.8-1.8-.9-.2-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.1.2-.3.2-.6.1-.3-.1-1.2-.4-2.2-1.4-.8-.7-1.4-1.6-1.5-1.9-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.2-.4.1-.2 0-.3 0-.5s-.6-1.5-.9-2c-.2-.5-.5-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.6-.7 1.9-1.3.2-.6.2-1.1.2-1.2 0-.2-.2-.2-.5-.3z"/><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/></svg>
+      Consultar disponibilidad
+    </a>
+    <p class="cart-hint">Te llevará a WhatsApp con la lista de tus productos para confirmar tallas y stock.</p>
+  </div>
+</aside>
+ 
+<script src="script.js"></script>
+</body>
+</html>
