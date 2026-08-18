@@ -417,6 +417,7 @@
   .mini-colors{
     display:flex; align-items:center; gap:6px;
     margin-bottom:12px;
+    flex-wrap:wrap;
   }
   .mini-swatch{
     width:17px; height:17px; border-radius:5px; flex-shrink:0;
@@ -428,12 +429,6 @@
   .mini-swatch:hover{ transform:translateY(-1px); }
   .mini-swatch.selected{
     box-shadow:0 0 0 1.5px var(--white), 0 0 0 3px var(--ink);
-  }
-  .mini-swatch-more{
-    font-family:'JetBrains Mono', monospace;
-    font-size:10.5px; font-weight:700;
-    color:var(--ink-soft);
-    margin-left:2px;
   }
   .size-btn{
     min-width:34px; height:30px; padding:0 8px;
