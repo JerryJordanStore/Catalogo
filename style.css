@@ -326,7 +326,7 @@
   /* ---------- CATEGORIES ---------- */
   .cat-grid{
     display:grid;
-    grid-template-columns:repeat(5, 1fr);
+    grid-template-columns:repeat(6, 1fr);
     gap:20px;
   }
   .cat-card{
@@ -356,6 +356,7 @@
   .cat-3{background:linear-gradient(150deg, #F5F5F3, var(--ivory-2)); box-shadow:var(--shadow-soft);}
   .cat-4{background:linear-gradient(150deg, #F0F0EE, var(--ivory-2)); box-shadow:var(--shadow-soft);}
   .cat-5{background:linear-gradient(150deg, #EAEAE8, var(--ivory-2)); box-shadow:var(--shadow-soft);}
+  .cat-6{background:linear-gradient(150deg, #EAEAE8, var(--ivory-2)); box-shadow:var(--shadow-soft);}
  
   /* ---------- PRODUCTS ---------- */
   .product-grid{
@@ -684,7 +685,7 @@
     .burger{display:flex;}
     .hero-grid{grid-template-columns:1fr;}
     .hero-visual{height:420px; margin-top:20px;}
-    .cat-grid{grid-template-columns:repeat(2,1fr);}
+    .cat-grid{grid-template-columns:repeat(6,1fr);}
     .product-grid{grid-template-columns:repeat(2,1fr);}
     .trust-strip{grid-template-columns:repeat(2,1fr);}
     .trust-item{border-bottom:1px solid var(--line); border-right:1px solid var(--line);}
