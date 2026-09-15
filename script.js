@@ -38,7 +38,6 @@ const products = [
   { id: "p19", cat: "Poleras", name: "Polera Tazmania", price: 69.90, old: null, badge: "new", desc: "Hecho de franela, con estampado adelante y atrás. La foto muestra primero la espalda.", colors: [{ name: "Estándar", hex: "#3A3A3A", images: ["assets/products/poleras/polera_tazmania_atr.webp", "assets/products/poleras/polera_tazmania_del.webp"], sizes: sizes(["L"]) }] },
   { id: "p20", cat: "Poleras", name: "Polera Bugs Bunny", price: 69.90, old: null, badge: "new", desc: "Hecho de franela, con estampado adelante y atrás. La foto muestra primero la espalda.", colors: [{ name: "Estándar", hex: "#3A3A3A", images: ["assets/products/poleras/polera_bugsbunny_atr.webp", "assets/products/poleras/polera_bugsbunny_del.webp"], sizes: sizes(["L"]) }] },
   { id: "p21", cat: "Poleras", name: "Oversize Derian", price: 69.90, old: null, badge: "new", desc: "Corte oversize. Hecho de franela.", colors: [{ name: "Hueso", hex: "#E8E1D0", images: ["assets/products/poleras/oversize_derian_hueso.webp"], sizes: sizes(["S"]) }, { name: "Plomo", hex: "#6E6E6E", images: ["assets/products/poleras/oversize_derian_plomo.webp"], sizes: sizes(["M"]) }] },
-  { id: "p22", cat: "Poleras", name: "Polera JJB", price: 39.00, old: null, badge: "liquidacion", desc: "Producto peruano 100% franela reactiva.", colors: [{ name: "Verde", hex: "#2F6B3A", images: ["assets/products/poleras/jjb_verde.webp"], sizes: sizes(["M"]) }, { name: "Marrón", hex: "#5B3A29", images: ["assets/products/poleras/jjb_marron.webp"], sizes: sizes(["M"]) }, { name: "Crema", hex: "#E8DCC0", images: ["assets/products/poleras/jjb_crema.webp"], sizes: sizes(["S"]) }] },
   { id: "p23", cat: "Poleras", name: "Polera Jordan", price: 59.00, old: null, badge: "low", desc: "Producto peruano 100% franela reactiva.", colors: [{ name: "Negro", hex: "#1A1A1A", images: ["assets/products/poleras/jordan_negro.webp"], sizes: sizes(["L"]) }, { name: "Marrón", hex: "#5B3A29", images: ["assets/products/poleras/jordan_marron.webp"], sizes: sizes(["M"]) }] },
   { id: "p24", cat: "Poleras", name: "Polera JJB Jordan", price: 59.00, old: null, badge: "low", desc: "Producto peruano 100% franela reactiva.", colors: [{ name: "Verde", hex: "#2F6B3A", images: ["assets/products/poleras/jjb_jordan.webp"], sizes: sizes(["S", "L"]) }] },
   { id: "p25", cat: "Poleras", name: "Polera NY", price: 59.00, old: null, badge: "low", desc: "Producto importado.", colors: [{ name: "Azul", hex: "#2455A4", images: ["assets/products/poleras/polera_ny.webp"], sizes: sizes(["M"]) }] },
@@ -62,7 +61,6 @@ const products = [
   { id: "p42", cat: "Casacas", name: "Casaca Impermeable", price: 79.00, old: null, badge: "low", desc: "Producto 100% peruano con forro acolchado interno.", colors: [{ name: "Verde", hex: "#2F6B3A", images: ["assets/products/casacas/impermeable_verde.webp"], sizes: sizes(["M"]) }] },
   { id: "p43", cat: "Casacas", name: "Casaca New York", price: 69.00, old: null, badge: "low", desc: "Producto importado.", colors: [{ name: "Negro", hex: "#1A1A1A", images: ["assets/products/casacas/casaca_ny.webp"], sizes: sizes(["M"]) }] },
   { id: "p44", cat: "Casacas", name: "Casaca Retro", price: 69.00, old: null, badge: "new", desc: "Producto importado, material tela mojada. La foto muestra primero la parte de adelante.", colors: [{ name: "Estándar", hex: "#3A3A3A", images: ["assets/products/casacas/casaca_retro_del.webp", "assets/products/casacas/casaca_retro_atr.webp"], sizes: sizes(["S"]) }] },
-  { id: "p45", cat: "Casacas", name: "Chaleco impermeable", price: 59.00, old: null, badge: "liquidacion", desc: "Producto importado.", colors: [{ name: "Negro", hex: "#1A1A1A", images: ["assets/products/chalecos/chaleco_impermeable_negro.webp"], sizes: sizes(["L"]) }, { name: "Azul", hex: "#2455A4", images: ["assets/products/chalecos/chaleco_impermeable_azul.webp"], sizes: sizes(["L"]) }] },
   // ---- ACCESORIOS ----
   { id: "p46", cat: "Accesorios", name: "Reloj Naviforce", price: 99.00, old: null, badge: "low", desc: "Producto importado, incluye estuche.", colors: [{ name: "Estándar", hex: "#3A3A3A", images: ["assets/products/accesorios/naviforce_normal.webp"], sizes: sizes(["Único"]) }] },
   { id: "p47", cat: "Accesorios", name: "Reloj Curren", price: 99.00, old: null, badge: "low", desc: "Producto importado, incluye estuche.", colors: [{ name: "Estándar", hex: "#3A3A3A", images: ["assets/products/accesorios/curren.webp"], sizes: sizes(["Único"]) }] },
@@ -83,6 +81,11 @@ const products = [
   { id: "p62", cat: "Accesorios", name: "Lentes Verde", price: 35.00, old: null, badge: "low", desc: "Producto importado, incluye estuche.", colors: [{ name: "Verde", hex: "#2F6B3A", images: ["assets/products/accesorios/lentes_verde.webp"], sizes: sizes(["Único"]) }] },
   { id: "p63", cat: "Accesorios", name: "Lentes Rojo", price: 25.00, old: null, badge: "low", desc: "Producto importado, incluye estuche.", colors: [{ name: "Rojo", hex: "#C0272D", images: ["assets/products/accesorios/lentes_rojo.webp"], sizes: sizes(["Único"]) }] },
   { id: "p64", cat: "Accesorios", name: "Lentes Negro Total", price: 35.00, old: null, badge: "low", desc: "Producto importado, incluye estuche.", colors: [{ name: "Negro", hex: "#1A1A1A", images: ["assets/products/accesorios/lentes_negro_total.webp"], sizes: sizes(["Único"]) }] },
+
+  // ---- LIQUIDACION ----
+  { id: "p22", cat: "Liquidacion", name: "Polera JJB", price: 39.00, old: 59.90, badge: "liquidacion", desc: "Producto peruano 100% franela reactiva.", colors: [{ name: "Verde", hex: "#2F6B3A", images: ["assets/products/poleras/jjb_verde.webp"], sizes: sizes(["M"]) }, { name: "Marrón", hex: "#5B3A29", images: ["assets/products/poleras/jjb_marron.webp"], sizes: sizes(["M"]) }, { name: "Crema", hex: "#E8DCC0", images: ["assets/products/poleras/jjb_crema.webp"], sizes: sizes(["S"]) }] },
+  { id: "p45", cat: "Liquidacion", name: "Chaleco impermeable", price: 39.00, old: 59.90, badge: "liquidacion", desc: "Producto importado.", colors: [{ name: "Negro", hex: "#1A1A1A", images: ["assets/products/chalecos/chaleco_impermeable_negro.webp"], sizes: sizes(["L"]) }, { name: "Azul", hex: "#2455A4", images: ["assets/products/chalecos/chaleco_impermeable_azul.webp"], sizes: sizes(["L"]) }] },
+
 ];
 
   (function() {
@@ -302,6 +305,23 @@ const filters = {
 
 function matchesFilters(p) {
   //if (filters.cat !== "Todos" && p.cat !== filters.cat) return false;
+
+  if (filters.cat !== "Todos") {
+
+    // Liquidación: filtra por badge
+    if (filters.cat === "Liquidacion") {
+      if (p.badge !== "liquidacion") return false;
+    }
+
+    // Las demás categorías: filtra normalmente
+    else {
+      if (Array.isArray(p.cat)) {
+        if (!p.cat.includes(filters.cat)) return false;
+      } else {
+        if (p.cat !== filters.cat) return false;
+      }
+    }
+  }
 
   if (filters.cat !== "Todos" && !(Array.isArray(p.cat) ? p.cat.includes(filters.cat) : p.cat === filters.cat)) return false;
 
