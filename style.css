@@ -331,73 +331,95 @@
   .chip-2{ bottom:26px; left:-24px; animation: float 5s ease-in-out infinite reverse;}
   .chip-dot{width:8px; height:8px; border-radius:50%; background:var(--gold);}
  
- /* ==========================================
-   CARRIL Y PÍLDORA FLOTANTE ANIMADA (SOLO PC)
+  /* ==========================================
+   BANNER DE DELIVERY EN EL FLUJO (PC Y LAPTOPS)
    ========================================== */
 
-  /* Por defecto se oculta en móviles */
-  .delivery-track {
-    display: none;
+  .delivery-inline-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50px 0 10px; /* Genera el espacio perfecto entre secciones */
+    width: 100%;
   }
 
-  /* Solo se activa en pantallas de PC / Tablet grande (>= 1024px) */
-  @media (min-width: 1024px) {
-    .delivery-track {
-      display: flex;
-      align-items: center;
-      position: absolute;
-      left: 0;
-      width: 100%;
-      bottom: 80px;
-      z-index: 1;
-      overflow: hidden;
-      pointer-events: none;
-      padding: 8px 0;
-    }
+  .banner-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--ink);
+    color: var(--ivory);
+    padding: 10px 20px;
+    border-radius: 100px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
 
-    .delivery-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      white-space: nowrap;
-      
-      /* Estilos visuales planos */
-      background-color: #111111;
-      color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 9999px;
-      padding: 10px 22px;
-      box-shadow: none;
-      
-      /* Tipografía */
-      font-family: 'JetBrains Mono', 'Inter', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      
-      /* Oculto fuera de pantalla por defecto */
-      transform: translateX(-100vw);
-      will-change: transform;
-      
-      /* Animación */
-      animation: singlePassPill 15s linear 0.2s 1 forwards;
-    }
+  .banner-pill:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
 
-    .delivery-pill .pill-icon {
-      font-size: 1rem;
-      line-height: 1;
+  .banner-pill .live-pulse {
+    width: 8px;
+    height: 8px;
+    background-color: var(--red);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--red);
+    flex-shrink: 0;
+    animation: pulseGlow 1.8s infinite ease-in-out;
+  }
+
+  .banner-pill .pill-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .banner-pill .pill-divider {
+    color: var(--gold);
+    font-size: 0.8rem;
+  }
+
+  .banner-pill .pill-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    color: var(--court-line);
+  }
+
+  .banner-pill .pill-btn {
+    background: var(--red);
+    color: #FFFFFF;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    margin-left: 4px;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .banner-pill .pill-btn:hover {
+    background: var(--red-deep);
+    transform: scale(1.03);
+  }
+
+  /* Ajuste responsive para pantallas pequeñas */
+  @media (max-width: 768px) {
+    .delivery-inline-banner {
+      display: none; /* Se oculta si estás usando la notificación Push en móviles */
     }
   }
 
-  /* Keyframe de movimiento de izquierda a derecha */
-  @keyframes singlePassPill {
-    0% {
-      transform: translateX(-100%);
-    }
-    100% {
-      transform: translateX(100vw);
-    }
+  @keyframes pulseGlow {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.3); }
   }
 
 
