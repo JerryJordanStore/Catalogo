@@ -1,91 +1,124 @@
-function sizes(disponibles, agotadas = []) {
-  return disponibles.map(t => ({ t, stock: !agotadas.includes(t) }));
+// ============================================================
+//  CATÁLOGO DESDE GOOGLE SHEETS (reemplaza el array "products")
+// ============================================================
+
+// 1) Pega aquí el link CSV que te da Google Sheets (Archivo > Compartir > Publicar en la web > CSV)
+const CATALOG_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTaQG87LuRr5B2HF_jleAp0zy7XwbbWOvBmrmD5oO-yQyUH9zAuOUVUyo4NDUFVAw/pub?gid=1186620164&single=true&output=csv";
+
+const CATALOG_CACHE_KEY = "jerryjordan_catalog_v1";
+
+function readCachedCatalog() {
+  try {
+    const cached = JSON.parse(localStorage.getItem(CATALOG_CACHE_KEY) || "null");
+    return Array.isArray(cached) ? cached : [];
+  } catch (e) { return []; }
 }
 
-const products = [
-  // ---- POLOS ----
-  { id: "p73", cat: ["Polos", "Shorts"], name: "Short Drill Beige + Polo", price: 89.90, old: null, badge: "pack", desc: "Pack de short drill en color negro más polo 100% algodón con corte híbrido, en colores negro o plomo.", colors: [{ name: "Negro", hex: "#1A1A1A", images: ["assets/products/shorts/pack_shortbeige_polonegro.webp"], sizes: sizes(["30", "32", "34", "S", "M", "L"]) }, { name: "Plomo", hex: "#6E6E6E", images: ["assets/products/shorts/pack_shortbeige_pologris.webp"], sizes: sizes(["30", "32", "34", "S", "M", "L"]) }] },
-  { id: "p74", cat: ["Polos", "Shorts"], name: "Short Drill Negro + Polo", price: 89.90, old: null, badge: "pack", desc: "Pack de short drill en color negro más polo 100% algodón con corte híbrido, en colores negro o plomo.", colors: [{ name: "Plomo", hex: "#6E6E6E", images: ["assets/products/shorts/pack_shortnegro_pologris.webp"], sizes: sizes(["30", "32", "34", "S", "M", "L"]) }, { name: "Negro", hex: "#1A1A1A", images: ["assets/products/shorts/pack_shortnegro_polonegro.webp"], sizes: sizes(["30", "32", "34", "S", "M", "L"]) }] },
-  { id: "p02", cat: "Polos", name: "Polo Goat", price: 39.90, old: null, badge: null, desc: "Producto peruano 100% algodón 20/01, peinado, reactivo y antipilling.", colors: [{ name: "Beige", hex: "#D8C7A1", images: ["assets/products/polos/goat_beige.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Vino", hex: "#6B1E2A", images: ["assets/products/polos/goat_rojo.webp"], sizes: sizes(["S"]) }, { name: "Negro", hex: "#1A1A1A", images: ["assets/products/polos/goat_negro.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Plomo", hex: "#6E6E6E", images: ["assets/products/polos/goat_gris.webp"], sizes: sizes(["S", "M", "L"]) }] },
-  { id: "p03", cat: "Polos", name: "Polo Millionaires", price: 39.90, old: null, badge: null, desc: "Producto peruano 100% algodón 20/01, peinado, reactivo y antipilling.", colors: [{ name: "Negro", hex: "#1A1A1A", images: ["assets/products/polos/millionaires_negro.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Verde", hex: "#2F6B3A", images: ["assets/products/polos/millionaires_verde.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Crema", hex: "#E8DCC0", images: ["assets/products/polos/millionaires_blanco.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Plomo", hex: "#6E6E6E", images: ["assets/products/polos/millionaires_gris.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Marrón", hex: "#5B3A29", images: ["assets/products/polos/millionaires_marron.webp"], sizes: sizes(["S", "M", "L"]) }] },
-  { id: "p04", cat: "Polos", name: "Polo Híbrido 3D", price: 39.90, old: null, badge: "new", desc: "Producto peruano 100% algodón 20/01, peinado, reactivo y antipilling. Corte híbrido.", colors: [{ name: "Negro", hex: "#1A1A1A", images: ["assets/products/polos/hibrido_negro.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Gris", hex: "#8A8A8A", images: ["assets/products/polos/hibrido_gris.webp"], sizes: sizes(["S", "M", "L"]) }] },
-  { id: "p05", cat: "Polos", name: "Polo Bad Boys", price: 39.90, old: null, badge: null, desc: "Producto peruano 100% algodón 20/01, peinado, reactivo y antipilling.", colors: [{ name: "Beige", hex: "#D8C7A1", images: ["assets/products/polos/badboys_beige.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Crema", hex: "#E8DCC0", images: ["assets/products/polos/badboys_crema.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Negro", hex: "#1A1A1A", images: ["assets/products/polos/badboys_negro.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Blanco", hex: "#F2F2ED", images: ["assets/products/polos/badboys_blanco.webp"], sizes: sizes(["S", "M", "L"]) }] },
-  { id: "p06", cat: "Polos", name: "Polo Millionaires2", price: 39.90, old: null, badge: "new", desc: "Producto peruano 100% algodón 20/01, peinado, reactivo y antipilling.", colors: [{ name: "Verde", hex: "#2F6B3A", images: ["assets/products/polos/millionaires2_verde.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Crema", hex: "#E8DCC0", images: ["assets/products/polos/millionaires2_crema.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Plomo", hex: "#6E6E6E", images: ["assets/products/polos/millionaires2_plomo.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Negro", hex: "#1A1A1A", images: ["assets/products/polos/millionaires2_negro.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Blanco", hex: "#F2F2ED", images: ["assets/products/polos/millionaires2_blanco.webp"], sizes: sizes(["S", "M", "L"]) } ] },
-  { id: "p07", cat: "Polos", name: "Polo M' Club", price: 39.90, old: null, badge: "new", desc: "Producto peruano 100% algodón 20/01, peinado, reactivo y antipilling.", colors: [{ name: "Crema", hex: "#E8DCC0", images: ["assets/products/polos/mclub_crema.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Plomo", hex: "#6E6E6E", images: ["assets/products/polos/mclub_plomo.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Negro", hex: "#1A1A1A", images: ["assets/products/polos/mclub_negro.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Blanco", hex: "#F2F2ED", images: ["assets/products/polos/mclub_blanco.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Verde", hex: "#2F6B3A", images: ["assets/products/polos/mclub_verde.webp"], sizes: sizes(["S", "M", "L"]) } ] },
-  { id: "p08", cat: "Polos", name: "Polo Angel of God", price: 39.90, old: null, badge: "new", desc: "Producto peruano 100% algodón 20/01, peinado, reactivo y antipilling.", colors: [{ name: "Perla", hex: "#E8DCC0", images: ["assets/products/polos/aog_crema.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Plomo", hex: "#6E6E6E", images: ["assets/products/polos/aog_plomo.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Negro", hex: "#1A1A1A", images: ["assets/products/polos/aog_negro.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Blanco", hex: "#F2F2ED", images: ["assets/products/polos/aog_blanco.webp"], sizes: sizes(["S", "M", "L"]) } ] },
-  { id: "p10", cat: "Polos", name: "Polo Jordan2", price: 39.90, old: null, badge: null, desc: "Producto peruano 100% algodón 20/01, peinado, reactivo y antipilling.", colors: [{ name: "Crema", hex: "#E8DCC0", images: ["assets/products/polos/jordan2_crema.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Blanco", hex: "#F2F2ED", images: ["assets/products/polos/jordan2_blanco.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Negro", hex: "#1A1A1A", images: ["assets/products/polos/jordan2_negro.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Beige", hex: "#D8C7A1", images: ["assets/products/polos/jordan2_beige.webp"], sizes: sizes(["S", "M", "L"]) }] },
-  { id: "p12", cat: "Polos", name: "Polo Holográfico JJ", price: 39.90, old: null, badge: null, desc: "Producto peruano 100% algodón 20/01, peinado, reactivo y antipilling.", colors: [{ name: "Negro c/Dorado", hex: "#1A1A1A", images: ["assets/products/polos/holo_negro_dorado.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Negro c/Plateado", hex: "#1A1A1A", images: ["assets/products/polos/holo_negro_plateado.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Gris c/Plateado", hex: "#8A8A8A", images: ["assets/products/polos/holo_gris.webp"], sizes: sizes(["S", "M", "L"]) }] },
-  { id: "p01", cat: "Polos", name: "Polo Corona Doble", price: 39.90, old: null, badge: null, desc: "Producto peruano 100% algodón 20/01, peinado, reactivo y antipilling.", colors: [{ name: "Negro", hex: "#1A1A1A", images: ["assets/products/polos/corona_negro_atr.webp", "assets/products/polos/corona_negro_del.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Blanco", hex: "#F2F2ED", images: ["assets/products/polos/corona_blanco_del.webp", "assets/products/polos/corona_blanco_atr.webp"], sizes: sizes(["S", "M", "L"]) }] },
-  { id: "p14", cat: "Polos", name: "Polo Francia", price: 39.90, old: null, badge: null, desc: "Producto peruano 100% algodón 20/01, peinado, reactivo y antipilling.", colors: [{ name: "Negro", hex: "#1A1A1A", images: ["assets/products/polos/francia_atr.webp", "assets/products/polos/francia_del.webp"], sizes: sizes(["S", "M", "L"]) }] },
-  { id: "p15", cat: "Polos", name: "Polo Inglaterra", price: 39.90, old: null, badge: null, desc: "Producto peruano 100% algodón 20/01, peinado, reactivo y antipilling.", colors: [{ name: "Blanco", hex: "#F2F2ED", images: ["assets/products/polos/inglaterra_atr.webp", "assets/products/polos/inglaterra_del.webp"], sizes: sizes(["S", "M", "L"]) }] },
-  { id: "p16", cat: "Polos", name: "Polo Noruega", price: 39.90, old: null, badge: null, desc: "Producto peruano 100% algodón 20/01, peinado, reactivo y antipilling.", colors: [{ name: "Vino", hex: "#6B1E2A", images: ["assets/products/polos/noruega_atr.webp", "assets/products/polos/noruega_del.webp"], sizes: sizes(["S", "M", "L"]) }] },
-  { id: "p17", cat: "Polos", name: "Polo Portugal", price: 39.90, old: null, badge: null, desc: "Producto peruano 100% algodón 20/01, peinado, reactivo y antipilling.", colors: [{ name: "Verde", hex: "#2F6B3A", images: ["assets/products/polos/portugal_atr.webp", "assets/products/polos/portugal_del.webp"], sizes: sizes(["S", "M", "L"]) }] },
-  { id: "p65", cat: "Polos", name: "Polo Worldwide", price: 39.90, old: null, badge: null, desc: "Producto peruano 100% algodón 20/01, peinado, reactivo y antipilling.", colors: [{ name: "Negro", hex: "#1A1A1A", images: ["assets/products/polos/worldwide_negro.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Verde", hex: "#2F6B3A", images: ["assets/products/polos/worldwide_verde.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Plomo", hex: "#6E6E6E", images: ["assets/products/polos/worldwide_plomo.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Marrón", hex: "#5B3A29", images: ["assets/products/polos/worldwide_marron.webp"], sizes: sizes(["S", "M", "L"]) }] },
-  { id: "p66", cat: "Polos", name: "Polo Old Money2", price: 39.90, old: null, badge: null, desc: "Producto peruano 100% algodón 20/01, peinado, reactivo y antipilling.", colors: [{ name: "Blanco", hex: "#F2F2ED", images: ["assets/products/polos/oldmoney2_blanco.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Negro", hex: "#1A1A1A", images: ["assets/products/polos/oldmoney2_negro.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Crema", hex: "#E8DCC0", images: ["assets/products/polos/oldmoney2_crema.webp"], sizes: sizes(["S", "M", "L"]) }] },
-  { id: "p67", cat: "Polos", name: "Camiseta Francia", price: 39.90, old: null, badge: null, desc: "Producto importado. Calidad G5. Talla completa.", colors: [{ name: "Azul", hex: "#2455A4", images: ["assets/products/polos/camiseta_francia_atr.webp", "assets/products/polos/camiseta_francia_del.webp"], sizes: sizes(["L"]) }] },
-  { id: "p68", cat: "Polos", name: "Polo Dsquared2 Import", price: 49.90, old: null, badge: null, desc: "Producto importado. Calidad G5. Talla completa.", colors: [{ name: "Negro", hex: "#1A1A1A", images: ["assets/products/polos/dsquared2_negro_atr.webp", "assets/products/polos/dsquared2_negro_del.webp"], sizes: sizes(["S"]) }] },
-  { id: "p69", cat: "Polos", name: "Polo LV Import", price: 49.90, old: null, badge: null, desc: "Producto importado. Calidad G5. Talla completa.", colors: [{ name: "Negro", hex: "#1A1A1A", images: ["assets/products/polos/lv_negro_atr.webp", "assets/products/polos/lv_negro_del.webp"], sizes: sizes(["S"]) }] },
-  { id: "p70", cat: "Polos", name: "Polo Amiri Import", price: 49.90, old: null, badge: null, desc: "Producto importado. Calidad G5. Talla completa.", colors: [{ name: "Negro", hex: "#1A1A1A", images: ["assets/products/polos/amiri_negro_atr.webp", "assets/products/polos/amiri_negro_del.webp"], sizes: sizes(["S"]) }, { name: "Blanco", hex: "#F2F2ED", images: ["assets/products/polos/amiri_blanco_atr.webp", "assets/products/polos/amiri_blanco_del.webp"], sizes: sizes(["S"]) }] },
-  { id: "p71", cat: "Polos", name: "Polo Givenchy Import", price: 49.90, old: null, badge: null, desc: "Producto importado. Calidad G5. Talla completa.", colors: [{ name: "Gris", hex: "#8A8A8A", images: ["assets/products/polos/givenchy_gris_atr.webp", "assets/products/polos/givenchy_gris_del.webp"], sizes: sizes(["S"]) }] },
-  // ---- SHORTS ----
-  { id: "p72", cat: "Shorts", name: "Short Drill", price: 59.90, old: null, badge: "new", desc: "Producto 100% peruano en material drill, con detalle bordado", colors: [{ name: "Negro", hex: "#1A1A1A", images: ["assets/products/shorts/short_drill_negro_del.webp", "assets/products/shorts/short_drill_negro_atr.webp"], sizes: sizes(["30", "32", "34"]) }, { name: "Beige", hex: "#D8C7A1", images: ["assets/products/shorts/short_drill_beige_del.webp", "assets/products/shorts/short_drill_beige_atr.webp"], sizes: sizes(["30", "32", "34"]) }] },
+let products = readCachedCatalog();   // copia de la última visita (se muestra al instante)
 
-    // ---- POLERAS ----
-  { id: "p19", cat: "Poleras", name: "Polera Tazmania", price: 69.90, old: null, badge: "new", desc: "Hecho de franela, con estampado adelante y atrás. La foto muestra primero la espalda.", colors: [{ name: "Estándar", hex: "#3A3A3A", images: ["assets/products/poleras/polera_tazmania_atr.webp", "assets/products/poleras/polera_tazmania_del.webp"], sizes: sizes(["L"]) }] },
-  { id: "p20", cat: "Poleras", name: "Polera Bugs Bunny", price: 69.90, old: null, badge: "new", desc: "Hecho de franela, con estampado adelante y atrás. La foto muestra primero la espalda.", colors: [{ name: "Estándar", hex: "#3A3A3A", images: ["assets/products/poleras/polera_bugsbunny_atr.webp", "assets/products/poleras/polera_bugsbunny_del.webp"], sizes: sizes(["L"]) }] },
-  { id: "p21", cat: "Poleras", name: "Oversize Derian", price: 69.90, old: null, badge: "new", desc: "Corte oversize. Hecho de franela.", colors: [{ name: "Hueso", hex: "#E8E1D0", images: ["assets/products/poleras/oversize_derian_hueso.webp"], sizes: sizes(["S"]) }, { name: "Plomo", hex: "#6E6E6E", images: ["assets/products/poleras/oversize_derian_plomo.webp"], sizes: sizes(["M"]) }] },
-  { id: "p23", cat: "Poleras", name: "Polera Jordan", price: 59.00, old: null, badge: "low", desc: "Producto peruano 100% franela reactiva.", colors: [{ name: "Negro", hex: "#1A1A1A", images: ["assets/products/poleras/jordan_negro.webp"], sizes: sizes(["L"]) }, { name: "Marrón", hex: "#5B3A29", images: ["assets/products/poleras/jordan_marron.webp"], sizes: sizes(["M"]) }] },
-  { id: "p24", cat: "Poleras", name: "Polera JJB Jordan", price: 59.00, old: null, badge: "low", desc: "Producto peruano 100% franela reactiva.", colors: [{ name: "Verde", hex: "#2F6B3A", images: ["assets/products/poleras/jjb_jordan.webp"], sizes: sizes(["S", "L"]) }] },
-  { id: "p28", cat: "Poleras", name: "Crewneck Jordan", price: 50.00, old: null, badge: "new", desc: "Producto peruano 100% franela reactiva.", colors: [{ name: "Plomo", hex: "#6E6E6E", images: ["assets/products/poleras/crewneck_jordan_plomo.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Verde", hex: "#2F6B3A", images: ["assets/products/poleras/crewneck_jordan_verde.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Negro", hex: "#1A1A1A", images: ["assets/products/poleras/crewneck_jordan_negro.webp"], sizes: sizes(["S"]) }, { name: "Melange", hex: "#A8A8A2", images: ["assets/products/poleras/crewneck_jordan_melange.webp"], sizes: sizes(["S", "M", "L"]) }] },
-  { id: "p29", cat: "Poleras", name: "Crewneck Jordan2", price: 50.00, old: null, badge: "new", desc: "Producto peruano 100% franela reactiva.", colors: [{ name: "Melange", hex: "#A8A8A2", images: ["assets/products/poleras/crewneck_jordan2_melange.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Plomo", hex: "#6E6E6E", images: ["assets/products/poleras/crewneck_jordan2_plomo.webp"], sizes: sizes(["S", "M", "L"]) }] },
-  { id: "p30", cat: "Poleras", name: "Crewneck Arkad", price: 49.90, old: null, badge: "new", desc: "Hecho de franela.", colors: [{ name: "Estándar", hex: "#3A3A3A", images: ["assets/products/poleras/crewneck_arkad.webp"], sizes: sizes(["S", "M"]) }] },
-  { id: "p31", cat: "Poleras", name: "Crewneck Snoopy", price: 49.90, old: null, badge: "new", desc: "Hecho de french terry.", colors: [{ name: "Beige", hex: "#D8C7A1", images: ["assets/products/poleras/crewneck_snoopy_beige.webp"], sizes: sizes(["M"]) }, { name: "Negro", hex: "#1A1A1A", images: ["assets/products/poleras/crewneck_snoopy_negro.webp"], sizes: sizes(["M"]) }] },
-  { id: "p32", cat: "Poleras", name: "Crewneck Millionaires", price: 50.00, old: null, badge: "new", desc: "Producto peruano 100% franela reactiva.", colors: [{ name: "Plomo", hex: "#6E6E6E", images: ["assets/products/poleras/crewneck_millionaires_plomo.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Melange", hex: "#A8A8A2", images: ["assets/products/poleras/crewneck_millionaires_melange.webp"], sizes: sizes(["S", "M", "L"]) } ] },
-  { id: "p33", cat: "Poleras", name: "Crewneck Goat", price: 50.00, old: null, badge: "new", desc: "Producto peruano 100% franela reactiva.", colors: [{ name: "Melange", hex: "#A8A8A2", images: ["assets/products/poleras/crewneck_goat_melange.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Plomo", hex: "#6E6E6E", images: ["assets/products/poleras/crewneck_goat_plomo.webp"], sizes: sizes(["S", "M", "L"]) }] },
-  { id: "p34", cat: "Poleras", name: "Polera Oldmoney", price: 59.00, old: null, badge: "new", desc: "Producto peruano 100% franela reactiva.", colors: [{ name: "Plomo", hex: "#6E6E6E", images: ["assets/products/poleras/polera_oldmoney_plomo.webp"], sizes: sizes(["S", "M", "L"]) }] },
-  { id: "p35", cat: "Poleras", name: "Polera Goat", price: 59.00, old: null, badge: "new", desc: "Producto peruano 100% franela reactiva.", colors: [{ name: "Verde", hex: "#2F6B3A", images: ["assets/products/poleras/polera_goat_verde.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Plomo", hex: "#6E6E6E", images: ["assets/products/poleras/polera_goat_plomo.webp"], sizes: sizes(["S", "M", "L"]) }, { name: "Melange", hex: "#A8A8A2", images: ["assets/products/poleras/polera_goat_melange.webp"], sizes: sizes(["S", "M", "L"]) }] },
-  { id: "p36", cat: "Poleras", name: "Polera Oversize Essentials", price: 69.90, old: null, badge: "new", desc: "Corte oversize. Hecho de franela, con estampado adelante y atrás.", colors: [{ name: "Azul", hex: "#2455A4", images: ["assets/products/poleras/essentials_azul_atr.webp", "assets/products/poleras/essentials_azul_del.webp"], sizes: sizes(["M"]) }, { name: "Plomo", hex: "#6E6E6E", images: ["assets/products/poleras/essentials_plomo_atr.webp", "assets/products/poleras/essentials_plomo_del.webp"], sizes: sizes(["M"]) }, { name: "Verde", hex: "#2F6B3A", images: ["assets/products/poleras/essentials_verde_atr.webp", "assets/products/poleras/essentials_verde_del.webp"], sizes: sizes(["M"]) }] },
-  // ---- CASACAS ----
-  { id: "p37", cat: "Casacas", name: "Casaca Vintage P", price: 99.00, old: null, badge: "low", desc: "Producto importado.", colors: [{ name: "Negro", hex: "#1A1A1A", images: ["assets/products/casacas/vintage_p.webp"], sizes: sizes(["L"]) }] },
-  { id: "p38", cat: "Casacas", name: "Casaca Vintage A25", price: 99.00, old: null, badge: "low", desc: "Producto importado.", colors: [{ name: "Negro", hex: "#1A1A1A", images: ["assets/products/casacas/vintage25_negro.webp"], sizes: sizes(["M"]) }] },
-  { id: "p39", cat: "Casacas", name: "Casaca Vintage 28", price: 99.00, old: null, badge: "low", desc: "Producto importado.", colors: [{ name: "Azul", hex: "#2455A4", images: ["assets/products/casacas/vintage28_azul.webp"], sizes: sizes(["M"]) }, { name: "Negro", hex: "#1A1A1A", images: ["assets/products/casacas/vintage28_negro.webp"], sizes: sizes(["S", "M", "L"]) }] },
-  { id: "p40", cat: "Casacas", name: "Casaca Vintage A17", price: 99.00, old: null, badge: "low", desc: "Producto importado.", colors: [{ name: "Vino", hex: "#6B1E2A", images: ["assets/products/casacas/vintage17_rojo.webp"], sizes: sizes(["L"]) }, { name: "Negro", hex: "#1A1A1A", images: ["assets/products/casacas/vintage17_negro.webp"], sizes: sizes(["M"]) }] },
-  // ---- ACCESORIOS ----
-  { id: "p46", cat: "Accesorios", name: "Reloj Naviforce", price: 99.00, old: null, badge: "low", desc: "Producto importado, incluye estuche.", colors: [{ name: "Estándar", hex: "#3A3A3A", images: ["assets/products/accesorios/naviforce_normal.webp"], sizes: sizes(["Único"]) }] },
-  { id: "p47", cat: "Accesorios", name: "Reloj Curren", price: 99.00, old: null, badge: "low", desc: "Producto importado, incluye estuche.", colors: [{ name: "Estándar", hex: "#3A3A3A", images: ["assets/products/accesorios/curren.webp"], sizes: sizes(["Único"]) }] },
-  { id: "p48", cat: "Accesorios", name: "Reloj SKMEI", price: 89.00, old: null, badge: "low", desc: "Producto importado, incluye estuche.", colors: [{ name: "Estándar", hex: "#3A3A3A", images: ["assets/products/accesorios/skmei_normal.webp"], sizes: sizes(["Único"]) }] },
-  { id: "p49", cat: "Accesorios", name: "Reloj Sanda Analógico", price: 99.00, old: null, badge: "low", desc: "Producto importado, incluye estuche.", colors: [{ name: "Estándar", hex: "#3A3A3A", images: ["assets/products/accesorios/sanda_verde.webp"], sizes: sizes(["Único"]) }] },
-  { id: "p50", cat: "Accesorios", name: "Reloj Sanda Digital", price: 99.00, old: null, badge: "low", desc: "Producto importado, incluye estuche.", colors: [{ name: "Negro", hex: "#1A1A1A", images: ["assets/products/accesorios/sanda_digital.webp"], sizes: sizes(["Único"]) }] },
-  { id: "p51", cat: "Accesorios", name: "Reloj Naviforce Digital", price: 89.00, old: null, badge: "low", desc: "Producto importado, incluye estuche.", colors: [{ name: "Estándar", hex: "#3A3A3A", images: ["assets/products/accesorios/naviforce_negro_digital.webp"], sizes: sizes(["Único"]) }] },
-  { id: "p52", cat: "Accesorios", name: "Reloj Poedagar G", price: 89.00, old: null, badge: "low", desc: "Producto importado, incluye estuche.", colors: [{ name: "Estándar", hex: "#3A3A3A", images: ["assets/products/accesorios/poedagar_grueso.webp"], sizes: sizes(["Único"]) }] },
-  { id: "p53", cat: "Accesorios", name: "Reloj Poedagar D", price: 89.00, old: null, badge: "low", desc: "Producto importado, incluye estuche.", colors: [{ name: "Estándar", hex: "#3A3A3A", images: ["assets/products/accesorios/poedagar_delgado.webp"], sizes: sizes(["Único"]) }] },
-  { id: "p54", cat: "Accesorios", name: "Reloj SKMEI Digital", price: 89.00, old: null, badge: "low", desc: "Producto importado, incluye estuche.", colors: [{ name: "Estándar", hex: "#3A3A3A", images: ["assets/products/accesorios/skmei_digital.webp"], sizes: sizes(["Único"]) }] },
-  { id: "p55", cat: "Accesorios", name: "Reloj Navifoce Verde", price: 89.00, old: null, badge: "low", desc: "Producto importado, incluye estuche.", colors: [{ name: "Verde", hex: "#2F6B3A", images: ["assets/products/accesorios/naviforce_verde_digital.webp"], sizes: sizes(["Único"]) }] },
-  { id: "p56", cat: "Accesorios", name: "Reloj Naviforce Plus", price: 125.00, old: null, badge: "low", desc: "Producto importado, incluye caja.", colors: [{ name: "Estándar", hex: "#3A3A3A", images: ["assets/products/accesorios/naviforce_plus.webp"], sizes: sizes(["Único"]) }] },
-  { id: "p57", cat: "Accesorios", name: "Reloj Poedagar Plateado", price: 115.00, old: null, badge: "low", desc: "Producto importado, incluye caja.", colors: [{ name: "Plateado", hex: "#B8B8B8", images: ["assets/products/accesorios/poedagar_plateado.webp"], sizes: sizes(["Único"]) }] },
-  { id: "p58", cat: "Accesorios", name: "Gorra New York", price: 35.00, old: null, badge: null, desc: "Producto importado.", colors: [{ name: "Negro", hex: "#1A1A1A", images: ["assets/products/accesorios/gorro_ny_negro.webp"], sizes: sizes(["Único"]) }, { name: "Beige", hex: "#D8C7A1", images: ["assets/products/accesorios/gorro_ny_beige.webp"], sizes: sizes(["Único"]) }, { name: "Crema", hex: "#E8DCC0", images: ["assets/products/accesorios/gorro_ny_crema.webp"], sizes: sizes(["Único"]) }] },
-  { id: "p59", cat: "Accesorios", name: "Gorra Conejo", price: 35.00, old: null, badge: null, desc: "Producto importado.", colors: [{ name: "Azul", hex: "#2455A4", images: ["assets/products/accesorios/gorro_conejo.webp"], sizes: sizes(["Único"]) }] },
-  { id: "p60", cat: "Accesorios", name: "Lentes Plateado", price: 39.00, old: null, badge: "low", desc: "Producto importado, incluye estuche.", colors: [{ name: "Plateado", hex: "#B8B8B8", images: ["assets/products/accesorios/lentes_plateado.webp"], sizes: sizes(["Único"]) }] },
-  { id: "p61", cat: "Accesorios", name: "Lentes Negro", price: 39.00, old: null, badge: "low", desc: "Producto importado, incluye estuche.", colors: [{ name: "Negro", hex: "#1A1A1A", images: ["assets/products/accesorios/lentes_negro.webp"], sizes: sizes(["Único"]) }] },
-  { id: "p62", cat: "Accesorios", name: "Lentes Verde", price: 35.00, old: null, badge: "low", desc: "Producto importado, incluye estuche.", colors: [{ name: "Verde", hex: "#2F6B3A", images: ["assets/products/accesorios/lentes_verde.webp"], sizes: sizes(["Único"]) }] },
-  { id: "p63", cat: "Accesorios", name: "Lentes Rojo", price: 25.00, old: null, badge: "low", desc: "Producto importado, incluye estuche.", colors: [{ name: "Rojo", hex: "#C0272D", images: ["assets/products/accesorios/lentes_rojo.webp"], sizes: sizes(["Único"]) }] },
-  { id: "p64", cat: "Accesorios", name: "Lentes Negro Total", price: 35.00, old: null, badge: "low", desc: "Producto importado, incluye estuche.", colors: [{ name: "Negro", hex: "#1A1A1A", images: ["assets/products/accesorios/lentes_negro_total.webp"], sizes: sizes(["Único"]) }] },
+// ---- Parser CSV (soporta comas y saltos de línea dentro de comillas) ----
+function parseCSV(text) {
+  const rows = [];
+  let row = [], cell = "", inQuotes = false;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (inQuotes) {
+      if (ch === '"' && text[i + 1] === '"') { cell += '"'; i++; }
+      else if (ch === '"') inQuotes = false;
+      else cell += ch;
+    } else if (ch === '"') inQuotes = true;
+    else if (ch === ",") { row.push(cell); cell = ""; }
+    else if (ch === "\n" || ch === "\r") {
+      if (ch === "\r" && text[i + 1] === "\n") i++;
+      row.push(cell); cell = "";
+      if (row.some(c => c.trim() !== "")) rows.push(row);
+      row = [];
+    } else cell += ch;
+  }
+  row.push(cell);
+  if (row.some(c => c.trim() !== "")) rows.push(row);
+  return rows;
+}
 
-  // ---- LIQUIDACION ----
-  { id: "p18", cat: ["Polos", "Liquidacion"], name: "Polo Inevitable Doble", price: 19.90, old: 25.90, badge: "liquidacion", desc: "Producto peruano 100% algodón 20/01, peinado, reactivo y antipilling.", colors: [{ name: "Blanco", hex: "#F2F2ED", images: ["assets/products/polos/inevitable2_blanco_atr.webp", "assets/products/polos/inevitable2_blanco_del.webp"], sizes: sizes(["L"]) }, { name: "Perla", hex: "#E8DCC0", images: ["assets/products/polos/inevitable2_perla_atr.webp", "assets/products/polos/inevitable2_perla_del.webp"], sizes: sizes(["M"]) }, { name: "Negro", hex: "#1A1A1A", images: ["assets/products/polos/inevitable2_negro_atr.webp", "assets/products/polos/inevitable2_negro_del.webp"], sizes: sizes(["M"]) }, { name: "Verde", hex: "#2F6B3A", images: ["assets/products/polos/inevitable2_verde_atr.webp", "assets/products/polos/inevitable2_verde_del.webp"], sizes: sizes(["S"]) }] },
-  { id: "p09", cat: ["Polos", "Liquidacion"], name: "Polo Jordan", price: 19.90, old: 29.90, badge: "liquidacion", desc: "Producto peruano 100% algodón 20/01, peinado, reactivo y antipilling.", colors: [{ name: "Verde", hex: "#2F6B3A", images: ["assets/products/polos/jordan_verde.webp"], sizes: sizes(["S"]) },  { name: "Gris Claro", hex: "#8A8A8A", images: ["assets/products/polos/jordan_gris.webp"], sizes: sizes(["M"]) }] },
-  { id: "p11", cat: ["Polos", "Liquidacion"], name: "Polo Old Money", price: 19.90, old: 29.90, badge: "liquidacion", desc: "Producto peruano 100% algodón 20/01, peinado, reactivo y antipilling.", colors: [{ name: "Marrón", hex: "#5B3A29", images: ["assets/products/polos/oldmoney_marron.webp"], sizes: sizes(["M"]) }] },
-  { id: "p13", cat: ["Polos", "Liquidacion"], name: "Polo Inevitable", price: 19.90, old: 25.90, badge: "liquidacion", desc: "Producto peruano 100% algodón 20/01, peinado, reactivo y antipilling.", colors: [{ name: "Perla", hex: "#E8DCC0", images: ["assets/products/polos/inevitable_crema.webp"], sizes: sizes(["S"]) }, { name: "Gris", hex: "#8A8A8A", images: ["assets/products/polos/inevitable_gris.webp"], sizes: sizes(["S"]) }, { name: "Negro", hex: "#1A1A1A", images: ["assets/products/polos/inevitable_negro.webp"], sizes: sizes(["S"]) }] },
-  { id: "p22", cat: ["Poleras", "Liquidacion"], name: "Polera JJB", price: 39.00, old: 59.90, badge: "liquidacion", desc: "Producto peruano 100% franela reactiva.", colors: [{ name: "Verde", hex: "#2F6B3A", images: ["assets/products/poleras/jjb_verde.webp"], sizes: sizes(["M"]) }, { name: "Marrón", hex: "#5B3A29", images: ["assets/products/poleras/jjb_marron.webp"], sizes: sizes(["M"]) }, { name: "Crema", hex: "#E8DCC0", images: ["assets/products/poleras/jjb_crema.webp"], sizes: sizes(["S"]) }] },
-  //{ id: "p25", cat: ["Poleras", "Liquidacion"], name: "Polera NY", price: 39.00, old: 49.00, badge: "liquidacion", desc: "Producto importado.", colors: [{ name: "Azul", hex: "#2455A4", images: ["assets/products/poleras/polera_ny.webp"], sizes: sizes(["M"]) }] },
-  { id: "p26", cat: ["Poleras", "Liquidacion"], name: "Polera Brooklyn", price: 39.00, old: 49.00, badge: "liquidacion", desc: "Producto importado.", colors: [{ name: "Crema", hex: "#E8DCC0", images: ["assets/products/poleras/brooklyn.webp"], sizes: sizes(["M"]) }] },
-  //{ id: "p27", cat: ["Poleras", "Liquidacion"], name: "Polera Milano", price: 39.00, old: 59.00, badge: "liquidacion", desc: "Producto importado.", colors: [{ name: "Verde", hex: "#2F6B3A", images: ["assets/products/poleras/milano.webp"], sizes: sizes(["M"]) }] },
-  //{ id: "p41", cat: ["Casacas", "Liquidacion"], name: "Casaca Vintage Boston", price: 49.00, old: 69.00, badge: "liquidacion", desc: "Producto importado.", colors: [{ name: "Azul", hex: "#2455A4", images: ["assets/products/casacas/vintage_boston.webp"], sizes: sizes(["L"]) }] },
-  { id: "p42", cat: ["Casacas", "Liquidacion"], name: "Casaca Impermeable", price: 59.00, old: 79.00, badge: "liquidacion", desc: "Producto 100% peruano con forro acolchado interno.", colors: [{ name: "Verde", hex: "#2F6B3A", images: ["assets/products/casacas/impermeable_verde.webp"], sizes: sizes(["M"]) }] },
-  { id: "p43", cat: ["Casacas", "Liquidacion"], name: "Casaca New York", price: 49.00, old: 69.00, badge: "liquidacion", desc: "Producto importado.", colors: [{ name: "Negro", hex: "#1A1A1A", images: ["assets/products/casacas/casaca_ny.webp"], sizes: sizes(["M"]) }] },
-  { id: "p44", cat: ["Casacas", "Liquidacion"], name: "Casaca Retro", price: 49.00, old: 69.00, badge: "liquidacion", desc: "Producto importado, material tela mojada. La foto muestra primero la parte de adelante.", colors: [{ name: "Estándar", hex: "#3A3A3A", images: ["assets/products/casacas/casaca_retro_del.webp", "assets/products/casacas/casaca_retro_atr.webp"], sizes: sizes(["S"]) }] },
-  { id: "p45", cat: ["Casacas", "Liquidacion"], name: "Chaleco impermeable", price: 39.00, old: 59.90, badge: "liquidacion", desc: "Producto importado.", colors: [{ name: "Negro", hex: "#1A1A1A", images: ["assets/products/chalecos/chaleco_impermeable_negro.webp"], sizes: sizes(["L"]) }, { name: "Azul", hex: "#2455A4", images: ["assets/products/chalecos/chaleco_impermeable_azul.webp"], sizes: sizes(["L"]) }] },
-];
+const splitList = s => String(s || "").split(",").map(x => x.trim()).filter(Boolean);
+
+function toNumber(v) {
+  if (v === undefined || v === null || String(v).trim() === "") return null;
+  const n = parseFloat(String(v).replace(/[^\d.,-]/g, "").replace(",", "."));
+  return isNaN(n) ? null : n;
+}
+
+// Acepta rutas locales (assets/...), links https://... y links de "compartir" de Google Drive.
+function normalizeImage(url) {
+  const u = String(url).trim();
+  const drive = u.match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:export=view&)?id=)([\w-]+)/);
+  if (drive) return `https://drive.google.com/thumbnail?id=${drive[1]}&sz=w1000`;
+  return u;
+}
+
+// Convierte las filas (1 fila = 1 color) en la estructura que ya usa tu web.
+function rowsToProducts(rows) {
+  const head = rows[0].map(h => h.trim().toLowerCase());
+  const idx = name => head.indexOf(name);
+  const col = {};
+  ["visible","id","categorias","nombre","precio","precio_antes","etiqueta",
+   "descripcion","color","hex","imagenes","tallas","agotadas"].forEach(n => col[n] = idx(n));
+
+  const get = (r, n) => (col[n] >= 0 ? (r[col[n]] || "").trim() : "");
+  const map = new Map();   // id -> producto (respeta el orden de la hoja)
+
+  rows.slice(1).forEach(r => {
+    const id = get(r, "id");
+    if (!id) return;
+    if (get(r, "visible").toUpperCase() === "NO") return;
+
+    if (!map.has(id)) {
+      const cats = splitList(get(r, "categorias"));
+      map.set(id, {
+        id,
+        cat: cats.length > 1 ? cats : (cats[0] || "Otros"),
+        name: get(r, "nombre"),
+        price: toNumber(get(r, "precio")) ?? 0,
+        old: toNumber(get(r, "precio_antes")),
+        badge: get(r, "etiqueta") || null,
+        desc: get(r, "descripcion"),
+        colors: []
+      });
+    }
+
+    const colorName = get(r, "color");
+    const images = splitList(get(r, "imagenes")).map(normalizeImage);
+    if (!colorName || images.length === 0) return;   // fila incompleta: se ignora
+
+    const all = splitList(get(r, "tallas"));
+    const out = splitList(get(r, "agotadas"));
+    map.get(id).colors.push({
+      name: colorName,
+      hex: get(r, "hex") || "#3A3A3A",
+      images,
+      sizes: all.map(t => ({ t, stock: !out.includes(t) }))
+    });
+  });
+
+  // descarta productos que quedaron sin colores válidos
+  return [...map.values()].filter(p => p.colors.length > 0);
+}
+
+async function loadCatalog() {
+  // Pide la versión más reciente a Google Sheets
+  try {
+    const res = await fetch(CATALOG_CSV_URL);
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const fresh = rowsToProducts(parseCSV(await res.text()));
+    if (fresh.length) {
+      products = fresh;
+      try { localStorage.setItem(CATALOG_CACHE_KEY, JSON.stringify(fresh)); } catch (e) {}
+    }
+  } catch (err) {
+    console.warn("No se pudo cargar el catálogo online:", err);
+  }
+}
+
 
   (function() {
     const track = document.getElementById('tickerTrack');
@@ -365,7 +398,8 @@ function renderCatalog() {
     ? `Mostrando los ${total} productos`
     : `Mostrando ${filtered.length} de ${total} productos`;
 }
-renderCatalog();
+if (products.length) renderCatalog();     // pinta la copia guardada (si existe)
+loadCatalog().then(renderCatalog);        // y luego la versión actualizada del Excel
 
 // Tabs de categoría
 document.getElementById("filter-cat").addEventListener("click", (e) => {
