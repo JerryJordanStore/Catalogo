@@ -3,7 +3,7 @@
 // ============================================================
 
 // 1) Pega aquí el link CSV que te da Google Sheets (Archivo > Compartir > Publicar en la web > CSV)
-const CATALOG_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTaQG87LuRr5B2HF_jleAp0zy7XwbbWOvBmrmD5oO-yQyUH9zAuOUVUyo4NDUFVAw/pub?gid=1186620164&single=true&output=csv";
+const CATALOG_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTaQG87LuRr5B2HF_jleAp0zy7XwbbWOvBmrmD5oO-yQyUH9zAuOUVUyo4NDUFVAw/pub?gid=951185511&single=true&output=csv";
 
 const CATALOG_CACHE_KEY = "jerryjordan_catalog_v1";
 
